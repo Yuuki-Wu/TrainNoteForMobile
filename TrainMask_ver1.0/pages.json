@@ -1,0 +1,74 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+            "path" : "pages/home/home",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/train/train",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/history/history",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/movement/movement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"list": [
+			{
+				"text": "首页",
+				"pagePath": "pages/home/home",
+				"iconPath": "static/icon/home.png",
+				"selectedIconPath": "static/icon/home_active.png"
+			},
+			{
+				"text": "训练",
+				"pagePath": "pages/train/train",
+				"iconPath": "/static/icon/train.png",
+				"selectedIconPath": "static/icon/train_active.png"
+			},
+			{	"text": "动作",
+				"pagePath": "pages/movement/movement",
+				"iconPath": "static/icon/movement.png",
+				"selectedIconPath": "static/icon/movement_active.png"
+			},
+			{
+				"text": "训练历史",
+				"pagePath": "pages/history/history",
+				"iconPath": "static/icon/history.png",
+				"selectedIconPath": "static/icon/history_active.png"
+			}
+		]
+	}
+}

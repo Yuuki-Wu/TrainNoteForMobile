@@ -2,7 +2,43 @@
 	<view class="mov">
 		<view class="tit">tit</view>
 		<view class="content">
-			<view class="left" style="border-right: 20rpx color: #38a51f;;">left</view>
+			<view class="left" style="border-right: 20rpx color: #38a51f;;">
+				<scroll-view enable-flex = true scroll-y="true" class="scroll" >
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+					<view class="position">
+						<text>胸</text>
+					</view>
+				</scroll-view>
+			</view>
 			<view class="right">
 
 				<view class="box" >
@@ -18,7 +54,23 @@
 					<text>引体向上</text>
 				</view>
 				<view class="box">
-					<image src="../../static/movement/杠铃划船.gif" @click="clickImg('chest','barbell-rows')"></image>
+					<image src="../../static/movement/杠铃划船.gif" @click="clickImg('back','barbell-rows')"></image>
+					<text>杠铃划船</text>
+				</view>
+				<view class="box" >
+					<image src="/static/movement/引体向上.gif" @click="clickImg('back','pull-up')"></image>
+					<text>引体向上</text>
+				</view>
+				<view class="box">
+					<image src="/static/movement/引体向上.gif"></image>
+					<text>引体向上</text>
+				</view>
+				<view class="box">
+					<image src="/static/movement/引体向上.gif"></image>
+					<text>引体向上</text>
+				</view>
+				<view class="box">
+					<image src="../../static/movement/杠铃划船.gif" @click="clickImg('back','barbell-rows')"></image>
 					<text>杠铃划船</text>
 				</view>
 			</view>
@@ -41,6 +93,9 @@
 				uni.navigateTo({
 					url:'/pages/movement-detail/'+position+'/'+name+'/'+name
 				})
+			},
+			selectPosition(){
+				
 			}
 		},
 		onLoad() {
@@ -58,7 +113,19 @@
 		.content {
 			display: flex;
 
-			.left {}
+			.left {
+				.scroll{
+					
+					.position{
+						margin-top: 100rpx;
+						text{
+							font-size: 30rpx;
+							
+						}
+					}
+				}
+				
+			}
 
 			.right {
 				display: flex;

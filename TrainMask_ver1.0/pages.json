@@ -55,7 +55,7 @@
             
         }
         ,{
-            "path" : "pages/movement-detail/chest/barbell-rows/barbell-rows",
+            "path" : "pages/movement-detail/back/barbell-rows/barbell-rows",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

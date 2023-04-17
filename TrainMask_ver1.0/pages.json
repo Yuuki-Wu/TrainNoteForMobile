@@ -36,6 +36,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/start_train/start_train",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

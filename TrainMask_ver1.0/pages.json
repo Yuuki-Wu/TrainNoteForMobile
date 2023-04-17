@@ -45,6 +45,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/movement-detail/back/pull-up/pull-up",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/movement-detail/chest/barbell-rows/barbell-rows",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

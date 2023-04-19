@@ -1,6 +1,6 @@
 <template>
-	<view>
-		首页
+	<view class="tit">
+		
 	</view>
 </template>
 
@@ -17,6 +17,11 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss">
+	page{
+		height: 100%;
+	}
+	.tit{
+		
+	}
 </style>

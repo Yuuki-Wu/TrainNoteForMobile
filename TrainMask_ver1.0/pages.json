@@ -44,34 +44,10 @@
                 "enablePullDownRefresh": false
             }
             
-        }
-        ,{
-            "path" : "pages/movement-detail/back/pull-up/pull-up",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/movement-detail/back/barbell-rows/barbell-rows",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/movement-detail/biceps/rope-curls/rope-curls",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+        },
+		{
+			"path": "pages/movement-detail/movement-detail"
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -4,7 +4,7 @@ import App from './App'
 import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
-
+Vue.prototype.$userId = ""
 try {
   function isPromise(obj) {
     return (

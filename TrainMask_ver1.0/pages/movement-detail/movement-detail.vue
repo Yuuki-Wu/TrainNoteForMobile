@@ -11,7 +11,7 @@
 						<text>{{ this.detail }}</text>
 					</view>
 					<view class="steps">
-						<text>{{ this.steps}}</text>
+						<text>{{ this.steps }}</text>
 					</view>
 				</view>
 				<view class="history"></view>

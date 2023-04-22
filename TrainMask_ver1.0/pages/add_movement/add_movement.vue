@@ -1,6 +1,9 @@
 <template>
 	<view class="mov">
-		<view class="tit">tit</view>
+		<view class="tit">
+			<button @click="add" size="mini">添加</button>
+			<text> 动作介绍 </text>
+		</view>
 		<view class="content">
 			<scroll-view enable-flex=true scroll-y="true" class="left">
 
@@ -11,41 +14,44 @@
 			<scroll-view enable-flex=true scroll-y="true" class="right">
 				<view class="back" v-if="res=='背'" v-for="(item, name) in movement.backItem" :key="name">
 					<view class="box">
-						<image :src="getImg(item, name)" @click="goDetail(name)"></image>
-						<text> {{movement.backItem[name].name}}</text>
+						<image :src="getImg(item, name)" mode="widthFix" ></image>
+						<text> {{movement.legItem[name].name}}</text>
+						<button @click="goDetail(name)" type="primary" size="mini">查看动作要点</button>
 					</view>
 				</view>
 				<view class="biceps" v-if="res=='二头'" v-for="(item, name) in movement.bicepsItem" :key="name">
 					<view class="box">
-						<image :src="getImg(item, name)" @click="goDetail(name)"></image>
-						<text> {{movement.bicepsItem[name].name}}</text>
+						<image :src="getImg(item, name)" mode="widthFix" ></image>
+						<text> {{movement.legItem[name].name}}</text>
+						<button @click="goDetail(name)" type="primary" size="mini">查看动作要点</button>
 					</view>
 				</view>
 				<view class="triceps" v-if="res=='三头'" v-for="(item, name) in movement.tricepsItem" :key="name">
 					<view class="box">
-						<image :src="getImg(item, name)" @click="goDetail(name)"></image>
-						<text> {{movement.tricepsItem[name].name}}</text>
+						<image :src="getImg(item, name)" mode="widthFix" ></image>
+						<text> {{movement.legItem[name].name}}</text>
+						<button @click="goDetail(name)" type="primary" size="mini">查看动作要点</button>
 					</view>
 				</view>
 				<view class="abs" v-if="res=='腹部'" v-for="(item, name) in movement.absItem" :key="name">
 					<view class="box">
-						<image :src="getImg(item, name)" @click="goDetail(name)"></image>
-						<text> {{movement.absItem[name].name}}</text>
+						<image :src="getImg(item, name)" mode="widthFix" ></image>
+						<text> {{movement.legItem[name].name}}</text>
+						<button @click="goDetail(name)" type="primary" size="mini">查看动作要点</button>			
 					</view>
 				</view>
 				<view class="leg" v-if="res=='腿'" v-for="(item, name) in movement.legItem" :key="name">
 					<view class="box">
-						<image :src="getImg(item, name)" @click="goDetail(name)"></image>
+						<image :src="getImg(item, name)" mode="widthFix" ></image>
 						<text> {{movement.legItem[name].name}}</text>
+						<button @click="goDetail(name)" type="primary" size="mini">查看动作要点</button>
 					</view>
 				</view>
-				<view v-if="res=='有氧'">
-					<view class="box"></view>
-				</view>
-				<view class="chest" v-if="res=='胸'" v-for="(item, name) in movement.chestItem" :key="name">
+				<view class="chest" v-if="res=='胸'" v-for="(item, name) in movement.chestItem" :key="name" >
 					<view class="box">
-						<image :src="getImg(item, name)" @click="goDetail(name)"></image>
+						<image :src="getImg(item, name)" mode="widthFix" @click="select(movement.chestItem[name].img)"></image>
 						<text> {{movement.chestItem[name].name}}</text>
+						<button @click="goDetail(name)" type="primary" size="mini">查看动作要点</button>
 					</view>
 				</view>
 			</scroll-view>
@@ -65,14 +71,15 @@
 					'二头',
 					'三头',
 					'腹部',
-					'背',
-					'有氧'
+					'背'
 				],
 				flag: false,
 				res: '',
 				position: '',
 				selectedItem: [],
-				movement: movement.data
+				movement: movement.data,
+				addItem:[],
+				
 			}
 		},
 		methods: {
@@ -111,6 +118,15 @@
 			},
 			getImg(position, name, selectedItem) {
 				return require("@/static/movement/" + this.position + '/' + this.selectedItem[name].img + '.gif');
+			},
+			add(){
+				uni.navigateTo({
+					url: '/pages/start_train/start_train?item=' + this.addItem
+				})
+			},
+			select(item){
+				this.addItem.push(item)
+				console.log(this.addItem)
 			}
 		},
 		onLoad() {
@@ -127,15 +143,21 @@
 	.mov {
 		background-color: #f0f0f0;
 
-		.tit {}
+		.tit {
+			
+			text{
+				font-size: 35rpx;
+				margin-left: 20%;
+			}
+		}
 
 		.content {
 			display: flex;
-
+			flex-direction: row;
 			.left {
 				border-right: 1px solid #000000;
-				width: 100rpx;
-				height: calc(100vh - var(--window-top) - 50rpx);
+				width: 20%;
+				
 
 				.position {
 					margin-top: 10rpx;
@@ -149,30 +171,34 @@
 
 			.right {
 				display: flex;
+				flex-wrap: nowrap;
 				flex-direction: row;
-				flex-flow: row wrap;
 				border-right: 1px solid #000000;
 				border-left: 1px solid #000000;
-				width: 100%;
+				width: 80%;
 
-				height: calc(100vh - var(--window-top));
+				height: 100vh;
 
 				.box {
 					display: flex;
 					flex-direction: column;
 					margin-left: 10rpx;
 					margin-top: 15rpx;
-
+					width: 350rpx;
 					image {
-						height: 200rpx;
-						width: 200rpx;
+						height: 350rpx;
+						width: 350rpx;
+						border-radius: 50%;
 					}
-
+					button {
+						color: #000000;
+						background-color: #f0f0f0;
+					}
 					text {
 						background-color: #ffffff;
 						text-align: center;
 					}
-
+					background-color: #ffffff;
 					border-width: 2rpx;
 					border-style: solid;
 					border-radius: 8rpx;

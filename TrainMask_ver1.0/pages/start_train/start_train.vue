@@ -12,7 +12,7 @@
 				<button @click="addmovement">添加动作</button>
 			</view>
 			<view class="setting">
-				<button>设置</button>
+				<button @click="setting">设置</button>
 			</view>
 		</view>
 	</view>
@@ -27,10 +27,15 @@
 		},
 		methods: {
 			addmovement(){
-				uni.switchTab({
-					url:'/pages/home/home'
+				uni.navigateTo({
+					url:'/pages/test/test'
 				})
 				console.log("click")
+			},
+			setting(){
+				uni.navigateTo({
+					url:'/pages/add_movement/add_movement'
+				})
 			}
 		}
 	}

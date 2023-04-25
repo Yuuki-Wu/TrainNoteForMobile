@@ -5,11 +5,10 @@
 </template>
 
 <script>
-	import movement from '@/common/util.js'
 	export default {
 		data() {
 			return {
-				m:movement
+				
 			}
 		},
 		methods: {

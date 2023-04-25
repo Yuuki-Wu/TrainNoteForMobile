@@ -1,5 +1,6 @@
 import App from './App'
-
+import {getList} from '@/common/request/request.js'
+Vue.prototype.$getList = getList
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false

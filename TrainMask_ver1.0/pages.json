@@ -1,6 +1,5 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		
 		{
 			"path": "pages/start_train/start_train",
 			"style": {
@@ -8,15 +7,25 @@
 				"enablePullDownRefresh": false
 			}
 		
-		},{
-		    "path" : "pages/add_movement/add_movement",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
 		},
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/add_movement/add_movement",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		
+
 		{
 			"path": "pages/login/login",
 			"style": {
@@ -26,13 +35,6 @@
 
 		},
 		{
-			"path": "pages/home/home",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
 			"path": "pages/train/train",
 			"style": {
 				"navigationBarTitleText": "",
@@ -53,21 +55,24 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, 
+		},
 		{
-			"path": "pages/movement-detail/movement-detail"
+			"path": "pages/movement-detail/movement-detail",
+			"style": {
+				"navigationBarTitleText": "动作细节",
+				"enablePullDownRefresh": false
+			}
 		}
-	    
-        ,{
-            "path" : "pages/test/test",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+
+		, {
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "测试",

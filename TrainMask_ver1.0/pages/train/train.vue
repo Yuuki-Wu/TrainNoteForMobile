@@ -13,7 +13,7 @@
 		},
 		methods: {
 			navigator(){
-				uni.redirectTo({
+				uni.navigateTo({
 					url:'/pages/start_train/start_train'
 				})
 			}

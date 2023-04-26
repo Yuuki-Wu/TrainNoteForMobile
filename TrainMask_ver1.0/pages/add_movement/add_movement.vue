@@ -80,9 +80,14 @@
 					this.movement[index].isSelected = 0;
 				}
 				if (this.movement[index].isSelected == 1) {
-					this.addItem.push(this.movement[index].movementImg)
+					this.addItem.push(this.movement[index].movementName)
+
 				} else {
-					this.addItem.pop(this.movement[index].movementImg)
+					let isexist = this.addItem.includes(this.movement[index].movementName)
+					if (isexist) {
+						this.addItem.splice(this.addItem.indexOf(this.movement[index].movementName), 1)
+					}
+
 				}
 				console.log(this.addItem)
 			}

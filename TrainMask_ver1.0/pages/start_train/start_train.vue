@@ -9,7 +9,7 @@
 				<view class="box" v-for="(item,index) in addItem " :key="index">
 					<view class="boxImg">
 						<image src="../../static/logo.png"></image>
-						<text>name</text>
+						<text>{{addItem[index]}}</text>
 						<text>totalweight</text>
 					</view>
 					<view class="boxNum">

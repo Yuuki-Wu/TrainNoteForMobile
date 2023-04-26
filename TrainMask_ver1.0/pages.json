@@ -9,6 +9,15 @@
 		
 		},
 		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "login",
+				"enablePullDownRefresh": false
+			}
+		
+		},
+		
+		{
 			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "",
@@ -26,14 +35,7 @@
 		},
 		
 
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "login",
-				"enablePullDownRefresh": false
-			}
-
-		},
+		
 		{
 			"path": "pages/train/train",
 			"style": {

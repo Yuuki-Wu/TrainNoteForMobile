@@ -25,42 +25,80 @@
 		data() {
 			return {
 				showPassword: true,
-				id: '',
-				password: '',
 				item: {
 					"id": "",
 					"password": ""
 				},
 				state: false,
+				getData: ''
 			}
 		},
 		methods: {
-			login() {
-				const db = uniCloud.database();
-				db.collection('user').where('id == "test"').get().then((res)=>{
-					if(this.password == res.result.data[0].password){
-						console.log('success')
-						this.$userId
-						uni.switchTab({
-							url:"/pages/home/home"
-						})
-					} else{
-						uni.showToast({
-							icon:'error',
-							title:'输入的密码有误'
-						})
-					}
-					console.log(res.result.data[0].password)
-				}).catch((err)=>{
-					console.log(err.code);
-					console.log(err.message);
-				});
+			async login() {
+				if (this.item.id != "" && this.item.id != null && this.item.id != undefined && this.item.password !=
+					"" && this.item.password != null && this.item.password != undefined) {
+					const res = this.$getList({
+						url: '/user/userLogin?uid=' + this.item.id + '&upd=' + this.item.password
+					})
+					res.then((result) => {
+						console.log("result", result.data);
+						if (result.data) {
+							
+							uni.showToast({
+								title: '登录成功',
+								icon: 'success'
+							})
+							let that = this
+							setTimeout(function() {
+								that.navigator()
+							}, 1000)
+						} else {
+							uni.showToast({
+								title: '密码错误',
+								icon: 'error'
+							})
+						}
+					})
+				} else {
+					uni.showToast({
+						title: '请输入id和密码！',
+						icon: 'error'
+					})
+				}
+
 			},
-			register() {
-				const db = uniCloud.database()
-				db.collection('user').add(this.item).then(e => {
-					console.log(e)
-				})
+			async register() {
+				if (this.item.id != "" && this.item.id != null && this.item.id != undefined && this.item.password !=
+					"" && this.item.password != null && this.item.password != undefined) {
+					const res = this.$getList({
+						url: '/user/userRegister?uid=' + this.item.id + '&upd=' + this.item.password
+					})
+					res.then((result) => {
+						console.log("result", result.data);
+						if (result.data) {
+							uni.showToast({
+								title: '注册成功',
+								icon: 'success'
+							})
+							let that = this
+							setTimeout(function() {
+								that.navigator()
+							}, 1000)
+
+						} else {
+							uni.showToast({
+								title: '账户已存在',
+								icon: 'error'
+							})
+						}
+					})
+				} else {
+					uni.showToast({
+						title: '请输入id和密码！',
+						icon: 'error'
+					})
+				}
+
 			},
 			onInput(e) {
 				this.password = e.target.value
@@ -70,6 +108,11 @@
 			},
 			stateChange() {
 				this.state = true
+			},
+			navigator() {
+				uni.switchTab({
+					url: '/pages/home/home'
+				})
 			}
 		},
 		onLoad() {

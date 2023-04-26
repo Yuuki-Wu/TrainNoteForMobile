@@ -6,7 +6,7 @@
 		</view>
 		<view class="middle">
 			<view class="minibox">
-				<view class="box">
+				<view class="box" v-for="(item,index) in addItem " :key="index">
 					<view class="boxImg">
 						<image src="../../static/logo.png"></image>
 						<text>name</text>
@@ -60,7 +60,7 @@
 		},
 		methods: {
 			addmovement() {
-				uni.redirectTo({
+				uni.navigateTo({
 					url: '/pages/add_movement/add_movement'
 				}, )
 			},
@@ -72,13 +72,6 @@
 			},
 			mini() {},
 			find() {
-				
-				// uni.request({
-				// 	url: '/pages/add_movement/add_movement',
-				// 	data:'this.addItem[0]',
-				// 	method:"POST",
-				// 	timeout:10000
-				// })
 				console.log(this.addItem)
 			},
 		     async getList() {	
@@ -120,6 +113,14 @@
 			border-left-color: #19d9ff; //设置左侧边框线为透明，如不设置则默认显示黑色
 			border-right-color: #19d9ff;
 			.box{
+				margin-top: 30rpx;
+				border-width: 2rpx;
+				border-style: solid;
+				border-radius: 8rpx;
+				border-bottom-color: #ff0000; //设置底部边框色值为#EEEEEE透明度为35%
+				border-top-color: #ff0000; //设置顶部边框线为透明，如不设置则默认显示黑色
+				border-left-color: #ff0000; //设置左侧边框线为透明，如不设置则默认显示黑色
+				border-right-color: #ff0000;
 				.boxImg{
 					display: flex;
 					image{
@@ -154,7 +155,7 @@
 	}
 	.bottom {
 		display: flex;
-		margin-top: 80vh;
+		margin-top: 70vh;
 		margin-left: 50;
 	}
 </style>

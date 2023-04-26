@@ -65,25 +65,6 @@
 				return url;
 			},
 			add(item) {
-				for (let i = 0; i < this.movement.chestItem.length; i++) {
-					this.movement.chestItem[i].select = false;
-				}
-				for (let i = 0; i < this.movement.legItem.length; i++) {
-					this.movement.legItem[i].select = false;
-				}
-				for (let i = 0; i < this.movement.backItem.length; i++) {
-					this.movement.backItem[i].select = false;
-				}
-				for (let i = 0; i < this.movement.bicepsItem.length; i++) {
-					this.movement.bicepsItem[i].select = false;
-				}
-				for (let i = 0; i < this.movement.absItem.length; i++) {
-					this.movement.absItem[i].select = false;
-				}
-				for (let i = 0; i < this.movement.tricepsItem.length; i++) {
-					this.movement.tricepsItem[i].select = false;
-				}
-				//首页
 				setTimeout(() => {
 					uni.$emit('addItem', this.addItem)
 				}, 300)

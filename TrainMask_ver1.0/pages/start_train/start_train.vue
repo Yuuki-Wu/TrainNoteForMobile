@@ -87,7 +87,6 @@
 						times: 0
 					}
 				}
-
 				this.movementList.push(this.list)
 				this.movementList[this.count].set = this.addItem[index].set
 				this.addItem[index].set++

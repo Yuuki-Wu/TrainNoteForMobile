@@ -2,25 +2,26 @@
 	<view>
 		<view class="top">
 			<view class="time"></view>
-			<view class="title" @click="find">请输入标题</view>
+			<input class="title" placeholder="请输入本次训练标题" />
 		</view>
 		<view class="middle">
 			<view class="minibox">
 				<view class="box" v-for="(item,index) in addItem " :key="index">
 					<view class="boxImg">
-						<image src="../../static/logo.png"></image>
-						<text>{{addItem[index]}}</text>
+						<image :src="getImg(index)" @click="goDetail(index)"></image>
+						<text>{{addItem[index].movementName}}</text>
+						<text> {{ addItem[index].set + '组'}}</text>
 						<text>totalweight</text>
 					</view>
-					<view class="boxNum">
-						<text>num</text>
-						<input class="weight" placeholder="次"/>
-						<input class="times" placeholder="Kg"/>
+
+					<view class="boxNum" v-for="item in addItem[index].set">
+						<input class="weight" placeholder="次" @input="setInput($event,item,0)" />
+						<input class="times" placeholder="Kg" />
 						<button class="complete" size="mini">√</button>
 						<button class="delete" size="mini">...</button>
 					</view>
 					<view class="boxOperate">
-						<button size="mini">新增一组</button>
+						<button size="mini" @click="addgroup(index)">新增一组</button>
 						<button size="mini">历史</button>
 					</view>
 				</view>
@@ -50,12 +51,10 @@
 				total_movement: 0,
 				feeling: '',
 				addItem: [],
-				movementList: [{
-					movement_name: '',
-					movement_weight: 0,
-					movement_set: 0,
-					movement_img: ''
-				}]
+				movementList: [],
+				planList: [],
+				singalList: [],
+				count: 0
 			}
 		},
 		methods: {
@@ -66,29 +65,57 @@
 			},
 			setting() {
 				uni.switchTab({
-					url:'/pages/home/home'
+					url: '/pages/home/home'
 				})
 				console.log("click")
 			},
 			mini() {},
 			find() {
-				console.log(this.addItem)
+
 			},
-		     async getList() {	
+			async getList() {
 				const res = await this.$getList({
-					url:'/user/getListUser'
+					url: '/user/getListUser'
 				})
-				this.addItem = res.data[0]	
-				console.log(res.data[0])
+			},
+			addgroup(index) {
+				this.list = {
+					movement_name: this.addItem[index].movementName,
+					set: 0,
+					data: {
+						weight: 0,
+						times: 0
+					}
+				}
+
+				this.movementList.push(this.list)
+				this.movementList[this.count].set = this.addItem[index].set
+				this.addItem[index].set++
+				this.count++
+				console.log(this.movementList)
+			},
+			getImg(index) {
+				let url = "http://localhost:920/view/movement/" + this.addItem[index].movementPositionEn + '/' + this
+					.addItem[index].movementImg + '.gif'
+				return url
+			},
+			goDetail(index) {
+				uni.navigateTo({
+					url: '/pages/movement-detail/movement-detail?img=' + this.addItem[index].movementImg
+				})
+			},
+			weightInput: function(e) {
+
+			},
+			setInput(e, index, num) {
+				console.log(index)
+				this.movementList[index].data.times = e.target.value
 			}
 		},
 		onLoad() {
-			console.log("1")
 			uni.$on('addItem', res => {
-				console.log(res);
 				this.addItem = res;
 			})
-			console.log("2")
 		},
 		onUnload() {
 			uni.$off('addItem')
@@ -103,8 +130,9 @@
 	}
 
 	.top {}
-	.middle{
-		.minibox{
+
+	.middle {
+		.minibox {
 			border-width: 2rpx;
 			border-style: solid;
 			border-radius: 8rpx;
@@ -112,7 +140,8 @@
 			border-top-color: #19d9ff; //设置顶部边框线为透明，如不设置则默认显示黑色
 			border-left-color: #19d9ff; //设置左侧边框线为透明，如不设置则默认显示黑色
 			border-right-color: #19d9ff;
-			.box{
+
+			.box {
 				margin-top: 30rpx;
 				border-width: 2rpx;
 				border-style: solid;
@@ -121,38 +150,45 @@
 				border-top-color: #ff0000; //设置顶部边框线为透明，如不设置则默认显示黑色
 				border-left-color: #ff0000; //设置左侧边框线为透明，如不设置则默认显示黑色
 				border-right-color: #ff0000;
-				.boxImg{
+
+				.boxImg {
 					display: flex;
-					image{
-						width: 50rpx;
-						height: 50rpx;
+
+					image {
+						width: 100rpx;
+						height: 100rpx;
 					}
 				}
-				.boxNum{
+
+				.boxNum {
 					display: flex;
-					.weight{
+
+					.weight {
 						background-color: #f0f0f0;
 						width: 50rpx;
-					
+
 					}
-					.times{
+
+					.times {
 						margin-left: 20rpx;
 						background-color: #f0f0f0;
 						width: 50rpx;
 					}
-					.complete{
+
+					.complete {
 						background-color: #f0f0f0;
 					}
-					.delete{
+
+					.delete {
 						background-color: #f0f0f0;
 					}
 				}
-				.boxOperate{
-					
-				}
+
+				.boxOperate {}
 			}
 		}
 	}
+
 	.bottom {
 		display: flex;
 		margin-top: 70vh;

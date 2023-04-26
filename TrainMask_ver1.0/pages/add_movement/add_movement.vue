@@ -47,7 +47,7 @@
 		methods: {
 			goDetail(index) {
 				uni.navigateTo({
-					url: '/pages/movement-detail/movement-detail?Index=' + index
+					url: '/pages/movement-detail/movement-detail?img=' + this.movement[index].movementImg
 				})
 			},
 			clickImg(position, name) {
@@ -61,35 +61,34 @@
 			getImg(index) {
 				let url = "http://localhost:920/view/movement/" + this.movement[index].movementPositionEn + '/' + this
 					.movement[index].movementImg + '.gif'
-				console.log(url)
 				return url;
 			},
 			add(item) {
 				setTimeout(() => {
 					uni.$emit('addItem', this.addItem)
 				}, 300)
-				console.log(this.addItem)
 				uni.redirectTo({
 					url: '/pages/start_train/start_train'
 				})
 			},
 			select(index) {
+				this.selectedItem = {
+					movementName: this.movement[index].movementName,
+					movementImg: this.movement[index].movementImg,
+					movementPositionEn: this.movement[index].movementPositionEn,
+					set:0,
+					weight:0
+				}
 				if (this.movement[index].isSelected == 0) {
 					this.movement[index].isSelected = 1;
 				} else {
 					this.movement[index].isSelected = 0;
 				}
 				if (this.movement[index].isSelected == 1) {
-					this.addItem.push(this.movement[index].movementName)
-
+					this.addItem.push(this.selectedItem)
 				} else {
-					let isexist = this.addItem.includes(this.movement[index].movementName)
-					if (isexist) {
-						this.addItem.splice(this.addItem.indexOf(this.movement[index].movementName), 1)
-					}
-
+					this.addItem = this.addItem.filter((res) => res.movementImg !== this.selectedItem.movementImg);
 				}
-				console.log(this.addItem)
 			}
 		},
 		onLoad: async function() {
@@ -97,7 +96,6 @@
 				url: '/user/getMovementList'
 			});
 			this.movement = res.data;
-			console.log(res.data)
 		}
 	}
 </script>

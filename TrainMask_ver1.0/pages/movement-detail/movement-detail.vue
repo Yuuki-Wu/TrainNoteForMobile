@@ -1,17 +1,17 @@
 <template>
 	<view>
 		<view class="top" >
-			<image :src="getImg()" v-if="movement.length > 0"></image>
+			<image :src="getImg()" v-if="movement.isSelected > -1"></image>
 		</view>
 		<view class="bottom">
 			<view class="tit">
 				<view class="main-point">
 					<view class="note"></view>
 					<view class="detail">
-						<text>{{ "起始细节:"+ movement[index].movementDetail }}</text>
+						<text>{{ "起始细节:"+ movement.movementDetail }}</text>
 					</view>
 					<view class="steps">
-						<text>{{ "起始步骤:"+ movement[index].movementSteps }}</text>
+						<text>{{ "起始步骤:"+ movement.movementSteps }}</text>
 					</view>
 				</view>
 				<view class="history"></view>
@@ -29,23 +29,23 @@
 		data() {
 			return {
 				movement:[],
-				index:-1
+				index:-1,
+				url:''
 			}
 		},
 		methods:{
 			getImg() {
-					console.log(this.index)
-					console.log(this.movement[this.index].movementPositionEn)
-					let url = "http://localhost:920/view/movement/" + this.movement[this.index].movementPositionEn + '/' + this.movement[this.index].movementImg + '.gif'
-					return url;
+					this.url = "http://localhost:920/view/movement/" + this.movement.movementPositionEn + '/' + this.movement.movementImg + '.gif'
+					console.log(this.url)
+					return this.url;
+					
 			},
 		},
 		onLoad: async function(option) {
-			this.index = option.Index
 			const res = await this.$getList({
-				url:'/user/getMovementList'
+				url:'/user/getImg?img=' + option.img
 			});
-			this.movement = res.data
+			this.movement = res.data[0]
 		}
 	}
 </script>

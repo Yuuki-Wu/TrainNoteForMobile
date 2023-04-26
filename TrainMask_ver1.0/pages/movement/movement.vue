@@ -46,7 +46,7 @@
 		methods: {
 			goDetail(index) {
 				uni.navigateTo({
-					url: '/pages/movement-detail/movement-detail?Index=' + index
+					url: '/pages/movement-detail/movement-detail?img=' + this.movement[index].movementImg
 				})
 			},
 			clickImg(position, name) {

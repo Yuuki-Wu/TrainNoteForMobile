@@ -2,7 +2,7 @@
 	<view>
 		<view class="top">
 			<view class="time"></view>
-			<input class="title" placeholder="请输入本次训练标题" />
+			<input class="title" placeholder="请输入本次训练标题" @input="titleInput($event)" />
 		</view>
 		<view class="middle">
 			<view class="minibox">
@@ -11,16 +11,18 @@
 						<image :src="getImg(index)" @click="goDetail(index)"></image>
 						<text>{{addItem[index].movementName}}</text>
 						<text> {{ addItem[index].set + '组'}}</text>
-						<text>totalweight</text>
+						<text>{{ addItem[index].weight + 'Kg'}}</text>
 					</view>
 
 					<view class="boxNum" v-for="item in addItem[index].set">
-						<input class="weight" placeholder="次" @input="setInput($event,item,0)" />
-						<input class="times" placeholder="Kg" />
+						<input class="times" placeholder="次" @input="setInput($event,item,index)" />
+						<input class="weight" placeholder="Kg" @input="weightInput($event,item,index)"
+							@blur="computeWeight(item, index)" />
 						<button class="complete" size="mini">√</button>
 						<button class="delete" size="mini">...</button>
 					</view>
 					<view class="boxOperate">
+						<input placeholder="本次动作感想..." @input="feelingInput($event, index)" @blur="" />
 						<button size="mini" @click="addgroup(index)">新增一组</button>
 						<button size="mini">历史</button>
 					</view>
@@ -28,14 +30,14 @@
 			</view>
 		</view>
 		<view class="bottom">
-			<view class="mini">
-				<button @click="getList" size="mini" type="primary">最小化</button>
-			</view>
 			<view class="add-movement">
 				<button @click="addmovement" size="mini" type="default">添加动作</button>
 			</view>
 			<view class="setting">
 				<button @click="setting" size="mini" type="primary">设置</button>
+			</view>
+			<view class="complete">
+				<button @click="submit()" size="mini" type="primary">完成</button>
 			</view>
 		</view>
 	</view>
@@ -69,15 +71,6 @@
 				})
 				console.log("click")
 			},
-			mini() {},
-			find() {
-
-			},
-			async getList() {
-				const res = await this.$getList({
-					url: '/user/getListUser'
-				})
-			},
 			addgroup(index) {
 				this.list = {
 					movement_name: this.addItem[index].movementName,
@@ -103,13 +96,50 @@
 					url: '/pages/movement-detail/movement-detail?img=' + this.addItem[index].movementImg
 				})
 			},
-			weightInput: function(e) {
+			weightInput(e, set, index) {
+				console.log(set)
+				let curS = 0
+				if (index > 0) {
+					curS = this.addItem[index - 1].set
+				}
+				this.movementList[set + curS * index].data.weight = e.target.value
 
 			},
-			setInput(e, index, num) {
-				console.log(index)
-				this.movementList[index].data.times = e.target.value
+			setInput(e, set, index) {
+				console.log(set)
+				let curS = 0
+				if (index > 0) {
+					curS = this.addItem[index - 1].set
+				}
+				this.movementList[set + curS * index].data.times = e.target.value
+			},
+			feelingInput(e, index) {
+				this.addItem[index].feeling = e.target.value
+			},
+			computeWeight(set, index) {
+				console.log("lost")
+				let curS = 0
+				if (index > 0) {
+					curS = this.addItem[index - 1].set
+				}
+				this.addItem[index].weight += this.movementList[set + curS * index].data.weight * this.movementList[set +
+					curS * index].data.times
+			},
+			async submit() {
+				for(let i = 0; i < this.addItem.length; i++){
+					const res = await this.$getList({
+						url: '/trainmovement/submitTrainMovement?uid=' + this.addItem[i].uid + '&mname=' + this.addItem[
+								i].movementName + '&mtype=' + this.addItem[i].movementType + '&mset=' + this
+							.addItem[i].set + '&mweight=' + this
+							.addItem[i].weight + '&mfeeling=' + this.addItem[i].feeling
+					})
+				}
+				uni.switchTab({
+					url:'/pages/home/home'
+				})
+				
 			}
+
 		},
 		onLoad() {
 			uni.$on('addItem', res => {

@@ -43,7 +43,7 @@
 		},
 		onLoad: async function(option) {
 			const res = await this.$getList({
-				url:'/user/getImg?img=' + option.img
+				url:'/movement/getImg?img=' + option.img
 			});
 			this.movement = res.data[0]
 		}

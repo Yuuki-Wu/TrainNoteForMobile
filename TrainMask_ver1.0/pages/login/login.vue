@@ -38,17 +38,21 @@
 				if (this.item.id != "" && this.item.id != null && this.item.id != undefined && this.item.password !=
 					"" && this.item.password != null && this.item.password != undefined) {
 					const res = this.$getList({
-						url: '/user/userLogin?uid=' + this.item.id + '&upd=' + this.item.password
+						url: '/user/Login?uid=' + this.item.id + '&upd=' + this.item.password
 					})
 					res.then((result) => {
 						console.log("result", result.data);
 						if (result.data) {
-							
+							getApp().globalData.uid = this.item.id
 							uni.showToast({
 								title: '登录成功',
 								icon: 'success'
 							})
 							let that = this
+							uni.setStorage({
+								key: 'uid',
+								data:this.item.id
+							})
 							setTimeout(function() {
 								that.navigator()
 							}, 1000)
@@ -71,7 +75,7 @@
 				if (this.item.id != "" && this.item.id != null && this.item.id != undefined && this.item.password !=
 					"" && this.item.password != null && this.item.password != undefined) {
 					const res = this.$getList({
-						url: '/user/userRegister?uid=' + this.item.id + '&upd=' + this.item.password
+						url: '/user/Register?uid=' + this.item.id + '&upd=' + this.item.password
 					})
 					res.then((result) => {
 						console.log("result", result.data);

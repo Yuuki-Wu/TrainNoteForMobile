@@ -11,7 +11,7 @@
 			<scroll-view enable-flex=true scroll-y="true" class="right">
 				<view v-for="(item,index) in movement" :key="index">
 					<view v-if="res==movement[index].movementPositionCn">
-						<view :class="[movement[index].isSelected === 0? 'box' : 'box1']">
+						<view class="box">
 							<image :src="getImg(index)" @click="goDetail(index)"></image>
 							<text> {{ movement[index].movementName }}</text>
 						</view>
@@ -33,8 +33,7 @@
 					'二头',
 					'三头',
 					'腹部',
-					'背',
-					'有氧'
+					'背'
 				],
 				flag: false,
 				res: '',
@@ -66,7 +65,7 @@
 		},
 		onLoad: async function() {
 			const res = await this.$getList({
-				url: '/user/getMovementList'
+				url: '/movement/getMovementList'
 			});
 			this.movement = res.data;
 			console.log(res.data)

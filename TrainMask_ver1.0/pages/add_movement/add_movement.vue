@@ -41,7 +41,8 @@
 				position: '',
 				selectedItem: [],
 				movement: [],
-				addItem: []
+				addItem: [],
+				uid:''
 			}
 		},
 		methods: {
@@ -57,6 +58,7 @@
 			},
 			selectPosition(res) {
 				this.res = res
+				
 			},
 			getImg(index) {
 				let url = "http://localhost:920/view/movement/" + this.movement[index].movementPositionEn + '/' + this
@@ -73,11 +75,15 @@
 			},
 			select(index) {
 				this.selectedItem = {
+					uid:this.uid,
 					movementName: this.movement[index].movementName,
 					movementImg: this.movement[index].movementImg,
 					movementPositionEn: this.movement[index].movementPositionEn,
+					movementType:this.movement[index].movementType,
 					set:0,
-					weight:0
+					weight:0,
+					feeling:''
+					
 				}
 				if (this.movement[index].isSelected == 0) {
 					this.movement[index].isSelected = 1;
@@ -93,9 +99,19 @@
 		},
 		onLoad: async function() {
 			const res = await this.$getList({
-				url: '/user/getMovementList'
+				url: '/movement/getMovementList'
 			});
 			this.movement = res.data;
+			let that = this
+			uni.getStorage({
+				key:'uid',
+				success(res) {
+					
+					// this.uid = this.res.data
+					console.log(res.data)
+					that.uid = res.data
+				}
+			})
 		}
 	}
 </script>

@@ -80,6 +80,7 @@
 					res.then((result) => {
 						console.log("result", result.data);
 						if (result.data) {
+							getApp().globalData.uid = this.item.id
 							uni.showToast({
 								title: '注册成功',
 								icon: 'success'

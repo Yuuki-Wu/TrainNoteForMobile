@@ -3,8 +3,8 @@
 		<view class="info" v-if="state">
 			<image :src="getImg()" @click=""></image>
 			<text> {{ info[0].name }}</text>
-			<text> {{info[0].weight +'kg'}}</text>
-			<text> {{info[0].height + 'cm'}}</text>
+			<text> {{ "体重" + info[0].weight +'kg'}}</text>
+			<text> {{ "身高" + info[0].height + 'cm'}}</text>
 			<button @click="navigator" plain="true">修改个人信息</button>
 		</view>
 	</view>
@@ -27,7 +27,7 @@ import AppVue from '../../App.vue'
 				})
 			},
 			getImg() {
-				let url = "http://localhost:920/view/userinfo/" + this.info[0].img + '.png'
+				let url = "http://localhost:920/view/userinfo/" + this.info[0].img
 				console.log(url)
 				return url;
 			},
@@ -45,10 +45,13 @@ import AppVue from '../../App.vue'
 			if(this.info.length > 0){
 				this.state = true
 			}
-			
-		}
-
-		
+		},
+		onShow: async function() {
+			const res = await this.$getList({
+				url: '/userinfo/getUserInfo?uid=' + getApp().globalData.uid
+			});
+			this.info = res.data
+		}		
 	}
 </script>
 

@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:920'
+const BASE_URL = 'http://192.168.1.107:920'
 export const getList = (options) => {
 	return new Promise((resolve, reject) => {
 		uni.request({

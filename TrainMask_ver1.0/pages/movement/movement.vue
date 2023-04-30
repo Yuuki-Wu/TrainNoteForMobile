@@ -57,7 +57,8 @@
 				this.res = res
 			},
 			getImg(index) {
-				let url = "http://localhost:920/view/movement/" + this.movement[index].movementPositionEn + '/' + this
+				let url = "http://192.168.1.107:920/view/movement/" + this.movement[index].movementPositionEn + '/' +
+					this //url http://??:920 ??改成后端ip
 					.movement[index].movementImg + '.gif'
 				console.log(url)
 				return url;
@@ -117,6 +118,7 @@
 					margin-left: 25rpx;
 					margin-top: 15rpx;
 					background-color: #ffffff;
+
 					image {
 						height: 250rpx;
 						width: 250rpx;
@@ -126,7 +128,7 @@
 						background-color: #ffffff;
 						text-align: center;
 						width: 250rpx;
-						
+
 					}
 
 					border-width: 2rpx;

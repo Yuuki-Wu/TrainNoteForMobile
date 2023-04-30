@@ -8,13 +8,13 @@
 	export default {
 		data() {
 			return {
-				
+
 			}
 		},
 		methods: {
-			navigator(){
+			navigator() {
 				uni.navigateTo({
-					url:'/pages/start_train/start_train'
+					url: '/pages/start_train/start_train'
 				})
 			}
 		},

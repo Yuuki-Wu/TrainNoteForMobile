@@ -42,7 +42,7 @@
 				selectedItem: [],
 				movement: [],
 				addItem: [],
-				uid:''
+				uid: ''
 			}
 		},
 		methods: {
@@ -58,10 +58,11 @@
 			},
 			selectPosition(res) {
 				this.res = res
-				
+
 			},
 			getImg(index) {
-				let url = "http://localhost:920/view/movement/" + this.movement[index].movementPositionEn + '/' + this
+				let url = "http://192.168.1.107:920/view/movement/" + this.movement[index].movementPositionEn + '/' +
+					this //url http://??:920 ??改成后端ip
 					.movement[index].movementImg + '.gif'
 				return url;
 			},
@@ -75,15 +76,15 @@
 			},
 			select(index) {
 				this.selectedItem = {
-					uid:this.uid,
+					uid: this.uid,
 					movementName: this.movement[index].movementName,
 					movementImg: this.movement[index].movementImg,
 					movementPositionEn: this.movement[index].movementPositionEn,
-					movementType:this.movement[index].movementType,
-					set:0,
-					weight:0,
-					feeling:''
-					
+					movementType: this.movement[index].movementType,
+					set: 0,
+					weight: 0,
+					feeling: ''
+
 				}
 				if (this.movement[index].isSelected == 0) {
 					this.movement[index].isSelected = 1;
@@ -104,9 +105,9 @@
 			this.movement = res.data;
 			let that = this
 			uni.getStorage({
-				key:'uid',
+				key: 'uid',
 				success(res) {
-					
+
 					// this.uid = this.res.data
 					console.log(res.data)
 					that.uid = res.data

@@ -2,7 +2,7 @@
 	<view>
 		<view class="top">
 			<view class="time"></view>
-			<input class="title" placeholder="请输入本次训练标题" @input="titleInput($event)" />
+			<input class="title" placeholder="请输入本次训练标题" @input="titleInput($event)" type="text"/>
 		</view>
 		<view class="middle">
 			<view class="minibox">
@@ -12,17 +12,17 @@
 						<text>{{addItem[index].movementName}}</text>
 						<text> {{ addItem[index].set + '组'}}</text>
 						<text>{{ addItem[index].weight + 'Kg'}}</text>
+						
 					</view>
 
 					<view class="boxNum" v-for="item in addItem[index].set">
-						<input class="times" placeholder="次" @input="setInput($event,item,index)" />
-						<input class="weight" placeholder="Kg" @input="weightInput($event,item,index)"
+						<input class="times" placeholder="次" @input="setInput($event,item,index)" type="number"/>
+						<input class="weight" placeholder="Kg" @input="weightInput($event,item,index)" type="digit"
 							@blur="computeWeight(item, index)" />
-						<button class="complete" size="mini">√</button>
-						<button class="delete" size="mini">...</button>
+							<text> {{"预测极限重量：" + computeMaxWeight(item,index)}} </text>
 					</view>
 					<view class="boxOperate">
-						<input placeholder="本次动作感想..." @input="feelingInput($event, index)" @blur="" />
+						<input placeholder="本次动作感想..." @input="feelingInput($event, index)" @blur="" type="text"/>
 						<button size="mini" @click="addgroup(index)">新增一组</button>
 						<button size="mini">历史</button>
 					</view>
@@ -87,7 +87,8 @@
 				console.log(this.movementList)
 			},
 			getImg(index) {
-				let url = "http://localhost:920/view/movement/" + this.addItem[index].movementPositionEn + '/' + this
+				let url = "http://192.168.1.107:920/view/movement/" + this.addItem[index].movementPositionEn + '/' +
+					this //url http://??:920 ??改成后端ip
 					.addItem[index].movementImg + '.gif'
 				return url
 			},
@@ -126,18 +127,28 @@
 					curS * index].data.times
 			},
 			async submit() {
-				for(let i = 0; i < this.addItem.length; i++){
+				for (let i = 0; i < this.addItem.length; i++) {
 					const res = await this.$getList({
-						url: '/trainmovement/submitTrainMovement?uid=' + this.addItem[i].uid + '&mname=' + this.addItem[
+						url: '/trainmovement/submitTrainMovement?uid=' + this.addItem[i].uid + '&mname=' + this
+							.addItem[
 								i].movementName + '&mtype=' + this.addItem[i].movementType + '&mset=' + this
 							.addItem[i].set + '&mweight=' + this
 							.addItem[i].weight + '&mfeeling=' + this.addItem[i].feeling
 					})
 				}
 				uni.switchTab({
-					url:'/pages/home/home'
+					url: '/pages/home/home'
 				})
-				
+
+			},
+			computeMaxWeight(set, index){
+				let curS = 0
+				if (index > 0) {
+					curS = this.addItem[index - 1].set
+				}
+				let rm = this.movementList[set + curS * index].data.times * 1/30 * this.movementList[set + curS * index].data.weight + this.movementList[set + curS * index].data.weight
+				console.log(set + curS * index)
+				return rm
 			}
 
 		},
@@ -161,6 +172,7 @@
 	.top {}
 
 	.middle {
+		bottom:10px;
 		.minibox {
 			border-width: 2rpx;
 			border-style: solid;
@@ -219,8 +231,9 @@
 	}
 
 	.bottom {
+		width: 100%;
+		position: fixed;
 		display: flex;
-		margin-top: 70vh;
-		margin-left: 50;
+		bottom: 0px;
 	}
 </style>

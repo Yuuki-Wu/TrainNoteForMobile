@@ -2,16 +2,16 @@
 	<view>
 		<view class="name">
 			<text>昵称</text>
-			<input placeholder="昵称" v-model="userInfo.name" />
+			<input placeholder="昵称" v-model="userInfo.name" type="nickname" />
 		</view>
 		<view class="weight">
 			<text>体重</text>
-			<input placeholder="请输入体重" v-model="userInfo.weight" />
+			<input placeholder="请输入体重" v-model="userInfo.weight" type="digit"/>
 			<text>kg</text>
 		</view>
 		<view class="height">
 			<text>身高</text>
-			<input placeholder="请输入身高" v-model="userInfo.height" />
+			<input placeholder="请输入身高" v-model="userInfo.height" type="digit"/>
 			<text>cm</text>
 		</view>
 		<view class="image">
@@ -49,7 +49,8 @@
 						let index = paths[0].indexOf(".");
 						let format = paths[0].substr(index);
 						uni.uploadFile({
-							url: 'http://localhost:920/upload/user/image?uid=' + getApp().globalData
+							url: 'http://192.168.1.107:920/upload/user/image?uid=' + getApp()
+								.globalData //url http://??:920 ??改成后端ip
 								.uid,
 							filePath: paths[0],
 							name: 'file',
@@ -59,7 +60,8 @@
 							success: (uploadFileRes) => {
 								console.log(uploadFileRes.data);
 								uni.request({
-									url: 'http://localhost:920/userinfo/updateUserInfo?uid=' +
+									url: 'http://192.168.1.107:920/userinfo/updateUserInfo?uid=' +
+										//url http://??:920 ??改成后端ip
 										getApp().globalData.uid + '&img=' + getApp()
 										.globalData.uid + format,
 									success() {
@@ -77,7 +79,8 @@
 			},
 			sumbit() {
 				uni.request({
-					url: 'http://localhost:920/userinfo/updateUserInfo?uid=' + getApp().globalData.uid +
+					url: 'http://192.168.1.107:920/userinfo/updateUserInfo?uid=' + getApp().globalData.uid +
+						//url http://??:920 ??改成后端ip
 						'&name=' + this.userInfo.name + '&height=' + this.userInfo.height + '&weight=' + this
 						.userInfo.weight,
 					success() {
@@ -101,19 +104,19 @@
 </script>
 
 <style lang="scss">
-	.name{
+	.name {
 		display: flex;
 	}
-	.weight{
+
+	.weight {
 		display: flex;
 	}
-	.height{
+
+	.height {
 		display: flex;
 	}
-	.image{
-		
-	}
-	.sumbit{
-		
-	}
+
+	.image {}
+
+	.sumbit {}
 </style>

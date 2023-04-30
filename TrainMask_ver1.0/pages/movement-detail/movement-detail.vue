@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="top" >
+		<view class="top">
 			<image :src="getImg()" v-if="movement.isSelected > -1"></image>
 		</view>
 		<view class="bottom">
@@ -28,22 +28,23 @@
 		name: 'detail',
 		data() {
 			return {
-				movement:[],
-				index:-1,
-				url:''
+				movement: [],
+				index: -1,
+				url: ''
 			}
 		},
-		methods:{
+		methods: {
 			getImg() {
-					this.url = "http://localhost:920/view/movement/" + this.movement.movementPositionEn + '/' + this.movement.movementImg + '.gif'
-					console.log(this.url)
-					return this.url;
-					
+				this.url = "http://192.168.1.107:920/view/movement/" + this.movement.movementPositionEn + '/' + this
+					.movement.movementImg + '.gif' //url http://??:920 ??改成后端ip
+				console.log(this.url)
+				return this.url;
+
 			},
 		},
 		onLoad: async function(option) {
 			const res = await this.$getList({
-				url:'/movement/getImg?img=' + option.img
+				url: '/movement/getImg?img=' + option.img
 			});
 			this.movement = res.data[0]
 		}

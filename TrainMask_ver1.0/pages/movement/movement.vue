@@ -1,6 +1,8 @@
 <template>
 	<view class="mov">
-		<view class="tit">tit</view>
+		<view class="tit">
+			<button plain="true" size="mini" @click="addCustom()">自定义动作</button>
+		</view>
 		<view class="content">
 			<scroll-view enable-flex=true scroll-y="true" class="left">
 
@@ -63,13 +65,24 @@
 				console.log(url)
 				return url;
 			},
+			addCustom(){
+				uni.navigateTo({
+					url:'/pages/add-custom/add-custom'
+				})
+			}
 		},
 		onLoad: async function() {
 			const res = await this.$getList({
 				url: '/movement/getMovementList'
 			});
+			//数据库基础动作
 			this.movement = res.data;
-			console.log(res.data)
+			const res1 = await this.$getList({
+				url:'/MovementUpload/getUpload?uid=' + getApp().globalData.uid
+			})
+			console.log(res1.data)
+			this.movement = this.movement.concat(res1.data)
+			//用户添加动作
 		}
 	}
 </script>
@@ -82,12 +95,20 @@
 	.mov {
 		background-color: #f0f0f0;
 
-		.tit {}
+		.tit {
+			position: fixed;
+			button{
+				width: 20vw;
+				font-size: 20rpx;
+			}
+			
+		}
 
 		.content {
 			display: flex;
 
 			.left {
+				margin-top: 50rpx;
 				border-right: 1px solid #000000;
 				width: 20%;
 				height: calc(100vh - var(--window-top) - 50rpx);

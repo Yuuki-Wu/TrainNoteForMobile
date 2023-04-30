@@ -93,6 +93,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/add-custom/add-custom",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

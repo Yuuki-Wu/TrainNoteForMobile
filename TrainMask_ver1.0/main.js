@@ -1,6 +1,8 @@
 import App from './App'
-import {getList} from '@/common/request/request.js'
+import {getList, upload, change} from '@/common/request/request.js'
 Vue.prototype.$getList = getList
+Vue.prototype.$upload = upload
+Vue.prototype.$change = change
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false

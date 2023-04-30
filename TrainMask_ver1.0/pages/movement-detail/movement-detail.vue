@@ -42,11 +42,37 @@
 
 			},
 		},
-		onLoad: async function(option) {
-			const res = await this.$getList({
-				url: '/movement/getImg?img=' + option.img
-			});
-			this.movement = res.data[0]
+		onLoad:function(option) {
+			console.log(option.img)
+			uni.request({
+				url:'http://192.168.1.107:920/movement/getImg?img=' + option.img,
+				success:(res)=> {
+					this.movement = res.data[0]
+					
+					if(typeof(this.movement) === 'undefined'){
+						console.log(this.movement,"123")
+						uni.request({
+							url:'http://192.168.1.107:920/MovementUpload/getUpload?uid=' + getApp().globalData.uid,
+							success:(res1)=> {
+								this.movement = res1.data[0]
+							}
+						})
+					}
+				}
+			})
+			// const res = await this.$getList({
+			// 	url: '/movement/getImg?img=' + option.img
+			// });
+			// this.movement = res.data[0]
+			// console.log(this.movement.length)
+			// if(this.movement.length == 0){
+			// 	const res1 = await this.$getList({
+			// 		url:'/MovementUpload/getUpload?uid=' + getApp().globalData.uid
+			// 	})
+			// 	console.log(res1.data)
+			// 	this.movement = res1.data[0]
+			// }
+			
 		}
 	}
 </script>

@@ -27,7 +27,8 @@
 				showPassword: true,
 				item: {
 					"id": "",
-					"password": ""
+					"password": "",
+					"time": new Date().toISOString()
 				},
 				state: false,
 				getData: ''
@@ -35,10 +36,12 @@
 		},
 		methods: {
 			async login() {
+				let _this = this
 				if (this.item.id != "" && this.item.id != null && this.item.id != undefined && this.item.password !=
 					"" && this.item.password != null && this.item.password != undefined) {
 					const res = this.$getList({
-						url: '/user/Login?uid=' + this.item.id + '&upd=' + this.item.password
+						url: '/user/Login?uid=' + this.item.id + '&upd=' + this.item.password + '&time=' +
+							_this.dateFormat(this.item.time)
 					})
 					res.then((result) => {
 						console.log("result", result.data);
@@ -51,7 +54,7 @@
 							let that = this
 							uni.setStorage({
 								key: 'uid',
-								data:this.item.id
+								data: this.item.id
 							})
 							setTimeout(function() {
 								that.navigator()
@@ -118,6 +121,17 @@
 				uni.switchTab({
 					url: '/pages/home/home'
 				})
+			},
+			dateFormat(time) {
+				let date = new Date(time);
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+				let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+				let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+				let minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+				let second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+				let today = year + '-' + month + '-' + day + " " + hour + ':' + minute + ':' + second;
+				return today
 			}
 		},
 		onLoad() {

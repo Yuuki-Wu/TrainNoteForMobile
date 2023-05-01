@@ -7,17 +7,15 @@
 				"enablePullDownRefresh": false
 			}
 		
-		},
+		},	
 		{
 			"path": "pages/start_train/start_train",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-		
+
 		},
-		
-		
 		{
 			"path": "pages/home/home",
 			"style": {
@@ -34,9 +32,6 @@
 			}
 
 		},
-		
-
-		
 		{
 			"path": "pages/train/train",
 			"style": {
@@ -65,44 +60,29 @@
 				"navigationBarTitleText": "动作细节",
 				"enablePullDownRefresh": false
 			}
-		}
-
-		, {
-			"path": "pages/test/test",
+		},
+{
+			"path": "pages/user_detail/user_detail",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/contact/contact",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/add-custom/add-custom",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 		}
-	    ,{
-            "path" : "pages/user_detail/user_detail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/contact/contact",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/add-custom/add-custom",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "测试",

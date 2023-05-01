@@ -1,9 +1,5 @@
 <template>
 	<view>
-		<view class="top">
-			<view class="time"></view>
-			<input class="title" placeholder="请输入本次训练标题" @input="titleInput($event)" type="text"/>
-		</view>
 		<view class="middle">
 			<view class="minibox">
 				<view class="box" v-for="(item,index) in addItem " :key="index">
@@ -168,8 +164,6 @@
 		height: 100%;
 		padding: 0;
 	}
-
-	.top {}
 
 	.middle {
 		bottom:10px;

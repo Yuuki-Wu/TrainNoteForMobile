@@ -61,8 +61,8 @@
 
 			},
 			getImg(index) {
-				let url = "http://192.168.1.107:920/view/movement/" + this.movement[index].movementPositionEn + '/' +
-					this //url http://??:920 ??改成后端ip
+				let url = "http://localhost:920/view/movement/" + this.movement[index].movementPositionEn + '/' +
+					this
 					.movement[index].movementImg + '.gif'
 				return url;
 			},
@@ -104,15 +104,7 @@
 			});
 			this.movement = res.data;
 			let that = this
-			uni.getStorage({
-				key: 'uid',
-				success(res) {
-
-					// this.uid = this.res.data
-					console.log(res.data)
-					that.uid = res.data
-				}
-			})
+			that.uid = getApp().globalData.uid;
 		}
 	}
 </script>

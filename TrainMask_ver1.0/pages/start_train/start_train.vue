@@ -7,15 +7,13 @@
 						<image :src="getImg(index)" @click="goDetail(index)"></image>
 						<text>{{addItem[index].movementName}}</text>
 						<text> {{ addItem[index].set + '组'}}</text>
-						<text>{{ addItem[index].weight + 'Kg'}}</text>
-						
+						<text>{{ addItem[index].weight + 'Kg'}}</text>		
 					</view>
-
 					<view class="boxNum" v-for="item in addItem[index].set">
 						<input class="times" placeholder="次" @input="setInput($event,item,index)" type="number"/>
 						<input class="weight" placeholder="Kg" @input="weightInput($event,item,index)" type="digit"
-							@blur="computeWeight(item, index)" />
-							<text> {{"预测极限重量：" + computeMaxWeight(item,index)}} </text>
+						@blur="computeWeight(item, index)"/>
+	
 					</view>
 					<view class="boxOperate">
 						<input placeholder="本次动作感想..." @input="feelingInput($event, index)" @blur="" type="text"/>
@@ -29,9 +27,6 @@
 			<view class="add-movement">
 				<button @click="addmovement" size="mini" type="default">添加动作</button>
 			</view>
-			<view class="setting">
-				<button @click="setting" size="mini" type="primary">设置</button>
-			</view>
 			<view class="complete">
 				<button @click="submit()" size="mini" type="primary">完成</button>
 			</view>
@@ -44,14 +39,9 @@
 		data() {
 			return {
 				list: [],
-				total_weight: 0,
-				total_set: 0,
-				total_movement: 0,
 				feeling: '',
 				addItem: [],
 				movementList: [],
-				planList: [],
-				singalList: [],
 				count: 0
 			}
 		},
@@ -60,12 +50,6 @@
 				uni.navigateTo({
 					url: '/pages/add_movement/add_movement'
 				}, )
-			},
-			setting() {
-				uni.switchTab({
-					url: '/pages/home/home'
-				})
-				console.log("click")
 			},
 			addgroup(index) {
 				this.list = {
@@ -83,7 +67,7 @@
 				console.log(this.movementList)
 			},
 			getImg(index) {
-				let url = "http://192.168.1.107:920/view/movement/" + this.addItem[index].movementPositionEn + '/' +
+				let url = "http://localhost:920/view/movement/" + this.addItem[index].movementPositionEn + '/' +
 					this //url http://??:920 ??改成后端ip
 					.addItem[index].movementImg + '.gif'
 				return url
@@ -137,16 +121,6 @@
 				})
 
 			},
-			computeMaxWeight(set, index){
-				let curS = 0
-				if (index > 0) {
-					curS = this.addItem[index - 1].set
-				}
-				let rm = this.movementList[set + curS * index].data.times * 1/30 * this.movementList[set + curS * index].data.weight + this.movementList[set + curS * index].data.weight
-				console.log(set + curS * index)
-				return rm
-			}
-
 		},
 		onLoad() {
 			uni.$on('addItem', res => {

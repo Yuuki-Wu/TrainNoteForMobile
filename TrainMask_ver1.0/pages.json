@@ -3,7 +3,7 @@
 		{
 			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "login",
+				"navigationBarTitleText": "登录页面",
 				"enablePullDownRefresh": false
 			}
 		
@@ -11,7 +11,7 @@
 		{
 			"path": "pages/start_train/start_train",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "训练页面",
 				"enablePullDownRefresh": false
 			}
 
@@ -19,7 +19,7 @@
 		{
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "主页",
 				"enablePullDownRefresh": false
 			}
 
@@ -27,7 +27,7 @@
 		{
 			"path": "pages/add_movement/add_movement",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "添加动作",
 				"enablePullDownRefresh": false
 			}
 
@@ -42,7 +42,7 @@
 		}, {
 			"path": "pages/history/history",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "训练历史",
 				"enablePullDownRefresh": false
 			}
 
@@ -92,7 +92,7 @@
 	"uniIdRouter": {},
 	"tabBar": {
 		"list": [{
-				"text": "首页1",
+				"text": "首页",
 				"pagePath": "pages/home/home",
 				"iconPath": "static/icon/home.png",
 				"selectedIconPath": "static/icon/home_active.png"

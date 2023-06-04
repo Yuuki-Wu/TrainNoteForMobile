@@ -1,7 +1,7 @@
 <template>
 	<view class="tit">
 		<view class="img" v-if="state">
-			<image :src="getImg()" @click=""></image>
+			<image :src=getImg() ></image>
 		</view>
 		<view class="info">
 			<view class="name">
@@ -45,7 +45,7 @@
 				})
 			},
 			getImg() {
-				let url = "http://192.168.1.107:920/view/userinfo/" + this.info[0].img //url http://??:920 ??改成后端ip
+				let url = "http://localhost:920/view/userinfo/" + this.info[0].img //url http://??:920 ??改成后端ip
 				console.log(url)
 				return url;
 			},

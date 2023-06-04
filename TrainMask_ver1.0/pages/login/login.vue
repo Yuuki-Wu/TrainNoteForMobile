@@ -11,10 +11,10 @@
 				:password="showPassword" />
 		</view>
 		<view class="login_button">
-			<button @click="login">login</button>
+			<button @click="login">登录</button>
 		</view>
 		<view>
-			<button @click="register">register</button>
+			<button @click="register">注册</button>
 
 		</view>
 	</view>
@@ -52,10 +52,6 @@
 								icon: 'success'
 							})
 							let that = this
-							uni.setStorage({
-								key: 'uid',
-								data: this.item.id
-							})
 							setTimeout(function() {
 								that.navigator()
 							}, 1000)

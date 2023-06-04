@@ -59,7 +59,7 @@
 				this.res = res
 			},
 			getImg(index) {
-				let url = "http://192.168.1.107:920/view/movement/" + this.movement[index].movementPositionEn + '/' +
+				let url = "http://localhost:920/view/movement/" + this.movement[index].movementPositionEn + '/' +
 					this //url http://??:920 ??改成后端ip
 					.movement[index].movementImg + '.gif'
 				console.log(url)
@@ -71,7 +71,7 @@
 				})
 			}
 		},
-		onLoad: async function() {
+		onShow: async function() {
 			const res = await this.$getList({
 				url: '/movement/getMovementList'
 			});

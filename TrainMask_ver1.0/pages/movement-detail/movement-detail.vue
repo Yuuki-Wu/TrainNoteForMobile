@@ -35,7 +35,7 @@
 		},
 		methods: {
 			getImg() {
-				this.url = "http://192.168.1.107:920/view/movement/" + this.movement.movementPositionEn + '/' + this
+				this.url = "http://localhost:920/view/movement/" + this.movement.movementPositionEn + '/' + this
 					.movement.movementImg + '.gif' //url http://??:920 ??改成后端ip
 				console.log(this.url)
 				return this.url;
@@ -45,18 +45,19 @@
 		onLoad:function(option) {
 			console.log(option.img)
 			uni.request({
-				url:'http://192.168.1.107:920/movement/getImg?img=' + option.img,
+				url:'http://localhost:920/movement/getImg?img=' + option.img,
 				success:(res)=> {
 					this.movement = res.data[0]
 					
 					if(typeof(this.movement) === 'undefined'){
-						console.log(this.movement,"123")
+						
 						uni.request({
-							url:'http://192.168.1.107:920/MovementUpload/getUpload?uid=' + getApp().globalData.uid,
+							url:'http://localhost:920/MovementUpload/getUpload?uid=' + getApp().globalData.uid,
 							success:(res1)=> {
 								this.movement = res1.data[0]
 							}
 						})
+						
 					}
 				}
 			})

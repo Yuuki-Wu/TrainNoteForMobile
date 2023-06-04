@@ -49,7 +49,7 @@
 						let index = paths[0].indexOf(".");
 						let format = paths[0].substr(index);
 						uni.uploadFile({
-							url: 'http://192.168.1.107:920/upload/user/image?uid=' + getApp()
+							url: 'http://localhost:920/upload/user/image?uid=' + getApp()
 								.globalData //url http://??:920 ??改成后端ip
 								.uid,
 							filePath: paths[0],
@@ -60,7 +60,7 @@
 							success: (uploadFileRes) => {
 								console.log(uploadFileRes.data);
 								uni.request({
-									url: 'http://192.168.1.107:920/userinfo/updateUserInfo?uid=' +
+									url: 'http://localhost:920/userinfo/updateUserInfo?uid=' +
 										//url http://??:920 ??改成后端ip
 										getApp().globalData.uid + '&img=' + getApp()
 										.globalData.uid + format,
@@ -78,16 +78,24 @@
 				})
 			},
 			sumbit() {
+				let _this = this
 				uni.request({
-					url: 'http://192.168.1.107:920/userinfo/updateUserInfo?uid=' + getApp().globalData.uid +
+					url: 'http://localhost:920/userinfo/updateUserInfo?uid=' + getApp().globalData.uid +
 						//url http://??:920 ??改成后端ip
 						'&name=' + this.userInfo.name + '&height=' + this.userInfo.height + '&weight=' + this
 						.userInfo.weight,
 					success() {
-						uni.showToast({
-							title: '更改完成',
-							icon: 'success'
-						})
+						if(_this.userInfo.name!=undefined && _this.userInfo.name != ''){
+							uni.showToast({
+								title: '更改完成',
+								icon: 'success'
+							})
+						} else {
+							uni.showToast({
+								title:'更改失败',
+								icon:'error'
+							})
+						}
 					},
 					fail() {
 						uni.showToast({

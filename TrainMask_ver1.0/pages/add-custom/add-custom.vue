@@ -49,6 +49,7 @@
 		methods: {
 			nameInput(e) {
 				this.movement.name = e.target.value
+				console.log(this.movement.name)
 			},
 			detailInput(e) {
 				this.movement.detail = e.target.value
@@ -67,7 +68,7 @@
 			},
 			upload() {
 				let _this = this;
-				
+
 				uni.chooseImage({
 					count: 1,
 					success: function(res) {
@@ -75,34 +76,45 @@
 						let index = paths[0].indexOf(".");
 						let format = paths[0].substr(index);
 						_this.movement.img = _this.movement.uid + '_' + _this.movement.name;
-						uni.uploadFile({
-							url: 'http://192.168.1.107:920/upload/user/movementImg?uid=' + getApp().globalData.uid 
-							+ '&movementName=' + _this.movement.name +
-								'&position=' + _this.movement.position
-								,
-							filePath: paths[0],
-							name: 'file',
-							formData: {
-								'user': 'test'
-							},
-							success: (uploadFileRes) => {
-								console.log(uploadFileRes.data);
-								uni.request({
-									url: 'http://192.168.1.107:920/MovementUpload/upload?uid=' +
-										_this.movement.uid + '&name=' + _this.movement.name +
-										'&position=' + _this.movement.position + '&img=' +
-										_this.movement.img + '&detail=' + _this.movement
-										.detail + '&steps=' + _this.movement.steps,
-									success() {
-										uni.showToast({
-											title: '更改成功',
-											icon: 'success'
-										})
-									}
-								})
+						if (_this.movement.name != '') {
+							uni.uploadFile({
+								url: 'http://localhost:920/upload/user/movementImg?uid=' + getApp()
+									.globalData.uid +
+									'&movementName=' + _this.movement.name +
+									'&position=' + _this.movement.position,
+								filePath: paths[0],
+								name: 'file',
+								formData: {
+									'user': 'test'
+								},
+								success: (uploadFileRes) => {
+									console.log(uploadFileRes.data);
+									uni.request({
+										url: 'http://localhost:920/MovementUpload/upload?uid=' +
+											_this.movement.uid + '&name=' + _this.movement
+											.name +
+											'&position=' + _this.movement.position +
+											'&img=' +
+											_this.movement.img + '&detail=' + _this
+											.movement
+											.detail + '&steps=' + _this.movement.steps,
+										success() {
+											uni.showToast({
+												title: '更改成功',
+												icon: 'success'
+											})
+										}
+									})
 
-							}
-						})
+								}
+							})
+						} else {
+							uni.showToast({
+								title: '请输入名称',
+								icon: 'error'
+							})
+						}
+
 					}
 				})
 			}
